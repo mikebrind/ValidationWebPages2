@@ -1,0 +1,58 @@
+body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 0.85em;
+}
+
+input[type="text"], input[type="password"],input[type="submit"]{
+    border-top: 2px solid #777;
+    border-left: 2px solid #777;
+    border-right: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    border-radius: 7px;
+}
+
+input[type="submit"]{
+    margin-left: 10px;
+}
+
+fieldset{
+    width: 600px;
+    background-color: #fef;
+}
+
+legend{
+    font-size: 1.2em;
+    background-color: #a7b3a7;
+    color: #f7fff7;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.row {
+    clear: both;
+    margin: 5px;
+}
+
+.label {
+    float: left;
+    width: 150px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.validation-summary-errors {
+    border: 2px solid #990099;
+    color: red;
+}
+
+.field-validation-error {
+    color: #990099;
+}
+
+.input-validation-error {
+    color: #990099;
+    background-color: #ff80ff;
+    border-top: 2px solid #990099;
+    border-left: 2px solid #990099;
+}

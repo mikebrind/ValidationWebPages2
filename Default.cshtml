@@ -1,0 +1,106 @@
+﻿@{
+    var result = "";
+    Validation.Add("firstname", 
+        Validator.Required("You must provide a first name"), 
+        Validator.StringLength(10, 0, "No more than 10 letters")
+        );
+    Validation.RequireField("lastname", "Gimme your Last name!");
+    Validation.Add("birthdate",
+        Validator.Required(),
+        Validator.DateTime()
+        );
+    Validation.Add("webaddress", 
+        Validator.Required("URL is required"),
+        Validator.Url("Must be a valid web address")
+        );
+    Validation.Add("email", 
+        Validator.Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$", 
+        "Invalid format for an email address")
+        );    
+    Validation.Add("number", 
+        Validator.Required("Make sure you say how many you want"),
+        Validator.Integer( "Must be a number")
+        );
+    Validation.RequireField("password", "Password cannot be empty");
+    Validation.Add("password2", 
+        Validator.Required("Put your password in here again"),
+        Validator.EqualsTo("password", "Must be the same as your password")
+        );
+    if(IsPost){
+        if (Validation.IsValid()) {
+            result += "<p>You entered:</p>";
+            foreach(string item in Request.Form){
+                result += item + ": " + Request[item] + "<br />";
+            }
+        }
+        else{
+            ModelState.AddFormError("There are some errors with your submission"); 
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web Pages 2 Validation</title>
+        <script src="~/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+        <link href="~/Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <fieldset>
+            <legend>Web Pages 2 Validation</legend>
+            <form method="post" action="">
+                <div class="row">
+                    @Html.Raw(result)
+                    @Html.ValidationSummary(true)
+                </div>
+                <div class="row">
+                    <label class="label" for="firstname">First Name:</label>
+                    <span><input name="firstname" type="text" value="@Request["firstname"]" class="@Validation.ClassFor("firstname")" @Validation.For("firstname") /></span>
+                    @Html.ValidationMessage("lastname")
+                </div>
+                <div class="row">
+                    <label class="label" for="lastname">Last Name:</label>
+                    <span>@Html.TextBox("lastname", Request["lastname"])</span>
+                    @Html.ValidationMessage("lastname")
+                </div>
+                <div class="row">
+                    <label class="label" for="birthdate">Birth Date:</label>
+                    <span>@Html.TextBox("birthdate", Request["birthdate"])</span>
+                    @Html.ValidationMessage("birthdate")
+                </div>
+                <div class="row">
+                    <label class="label" for="webaddress">Web Address:</label>
+                    <span>@Html.TextBox("webaddress", Request["webaddress"])</span>
+                    @Html.ValidationMessage("webaddress")
+                </div>
+                <div class="row">
+                    <label class="label" for="email">Email:</label>
+                    <span>@Html.TextBox("email", Request["email"])</span>
+                    @Html.ValidationMessage("email")
+                </div>
+                <div class="row">
+                    <label class="label" for="number">Number Required:</label>
+                    <span>@Html.TextBox("number", Request["number"])</span>
+                    @Html.ValidationMessage("number")
+                </div>
+                <div class="row">
+                    <label class="label" for="password">Password:</label>
+                    <span>@Html.Password("password")</span>
+                    @Html.ValidationMessage("password")
+                </div>
+                <div class="row">
+                    <label class="label" for="password2">Password Again:</label>
+                    <span>@Html.Password("password2")</span>
+                    @Html.ValidationMessage("password2")
+                </div>
+                <div>
+                    <span class="label">&nbsp;</span>
+                    <span><input type="submit" value="Submit" /></span>
+                </div>
+            </form>
+        </fieldset>
+    </body>
+</html>

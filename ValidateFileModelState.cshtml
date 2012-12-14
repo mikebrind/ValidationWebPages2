@@ -1,0 +1,33 @@
+﻿@{
+    if(IsPost){
+        if(Request.Files[0].FileName.IsEmpty()){
+            ModelState.AddError("file", "You must upload a file");
+        }
+        if(!ModelState.IsValid){
+            ModelState.AddFormError("Please correct the problems");
+        }
+    }
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link href="~/Content/StyleSheet.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        @Html.ValidationSummary(true)
+        <form method="post" enctype="multipart/form-data" action="">
+            <div class="row">
+                <label class="label" for="file">Upload file:</label>
+                <span><input name="file" id="file" type="file" /></span>
+                @Html.ValidationMessage("file")
+            </div>
+            <div>
+                <span class="label">&nbsp;</span>
+                <span><input type="submit" value="Submit" /></span>
+            </div>
+        </form>
+    </body>
+</html>

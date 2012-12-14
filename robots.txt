@@ -1,0 +1,11 @@
+Validator.DateTime ([error message])
+Validator.Decimal([error message])
+Validator.EqualsTo(otherField, [error message])
+Validator.Float([error message])
+Validator.Integer([error message])
+Validator.Range(min, max [, error message])
+Validator.RegEx(pattern [, error message])
+Validator.Required([error message])
+Validator.StringLength(length)
+Validator.Url([error message])
+# WebMatrix 1.0
